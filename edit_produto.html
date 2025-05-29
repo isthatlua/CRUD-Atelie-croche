@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <h3>EDITAR PRODUTO</h3>
+        {% if produto %}
+        <form method="post" action="{{ url_for('edit_produto', id_produto=produto.ID_PRODUTO) }}">
+            <div class="mb-3">
+                <label for="nome_produto" class="form-label">Nome do Produto</label>
+                <input type="text" name="nome_produto" id="nome_produto" value="{{ produto.NOME }}" required
+                    class="form-control" placeholder="Nome do Produto">
+            </div>
+            <div class="mb-3">
+                <label for="descricao_produto" class="form-label">Descrição</label>
+                <textarea name="descricao_produto" id="descricao_produto" class="form-control"
+                    placeholder="Descrição do Produto (opcional)">{{ produto.DESCRICAO }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="preco_produto" class="form-label">Preço</label>
+                <input type="number" step="0.01" name="preco_produto" id="preco_produto" value="{{ produto.PRECO }}"
+                    required class="form-control" placeholder="Preço (ex: 29.99)">
+            </div>
+            <button type="submit" class="btn btn-primary">Atualizar Produto</button>
+        </form>
+        {% else %}
+        <div class="alert alert-warning" role="alert">
+            Produto não encontrado.
+        </div>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Voltar</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

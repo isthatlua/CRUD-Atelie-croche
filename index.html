@@ -1,0 +1,82 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>CLIENTES</h3>
+        <a href="{{ url_for('add_cliente') }}" class="btn btn-success">+ Novo Cadastro Cliente</a>
+    </div>
+    {% if datas %} {# 'datas' aqui se refere aos clientes #}
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente_row in datas %} {# Renomeado para clareza #}
+            <tr>
+                <td>{{ cliente_row.ID }}</td> {# Usando o ID real do cliente #}
+                <td>{{ cliente_row.NOME }}</td>
+                <td>{{ cliente_row.TELEFONE }}</td>
+                <td><a href="{{ url_for('edit_cliente', id=cliente_row.ID) }}" class="btn btn-primary btn-sm">Editar</a>
+                </td>
+                <td><a href="{{ url_for('delete_cliente', id=cliente_row.ID) }}" class="btn btn-danger btn-sm"
+                        onclick="return confirm('Tem certeza que deseja deletar este cliente?')">Deletar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        Nenhum cliente cadastrado.
+    </div>
+    {% endif %}
+</div>
+
+<hr class="my-5">
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>PRODUTOS</h3>
+        <a href="{{ url_for('add_produto') }}" class="btn btn-info">+ Novo Produto</a>
+    </div>
+    {% if produtos %} {# 'produtos' é a nova variável passada para os produtos #}
+    <table class="table table-bordered table-striped">
+        <thead class="table-info">
+            <tr>
+                <th scope="col">ID Produto</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Preço (R$)</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for produto_item in produtos %}
+            <tr>
+                <td>{{ produto_item.ID_PRODUTO }}</td>
+                <td>{{ produto_item.NOME }}</td>
+                <td>{{ produto_item.DESCRICAO if produto_item.DESCRICAO else '-' }}</td>
+                <td>{{ "%.2f"|format(produto_item.PRECO) }}</td> {# Formata o preço para duas casas decimais #}
+                <td><a href="{{ url_for('edit_produto', id_produto=produto_item.ID_PRODUTO) }}"
+                        class="btn btn-primary btn-sm">Editar</a></td>
+                <td><a href="{{ url_for('delete_produto', id_produto=produto_item.ID_PRODUTO) }}"
+                        class="btn btn-danger btn-sm"
+                        onclick="return confirm('Tem certeza que deseja deletar este produto?')">Deletar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        Nenhum produto cadastrado.
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

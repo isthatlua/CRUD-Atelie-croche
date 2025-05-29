@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <h3>ADICIONAR NOVO PRODUTO</h3>
+        <form method="post" action="{{ url_for('add_produto') }}">
+            <div class="mb-3">
+                <label for="nome_produto" class="form-label">Nome do Produto</label>
+                <input type="text" name="nome_produto" id="nome_produto" required class="form-control"
+                    placeholder="Nome do Produto">
+            </div>
+            <div class="mb-3">
+                <label for="descricao_produto" class="form-label">Descrição</label>
+                <textarea name="descricao_produto" id="descricao_produto" class="form-control"
+                    placeholder="Descrição do Produto (opcional)"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="preco_produto" class="form-label">Preço</label>
+                <input type="number" step="0.01" name="preco_produto" id="preco_produto" required class="form-control"
+                    placeholder="Preço (ex: 29.99)">
+            </div>
+            <button type="submit" class="btn btn-primary">Adicionar Produto</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
