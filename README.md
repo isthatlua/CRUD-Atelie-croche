@@ -2,6 +2,9 @@
 
 Este é um projeto simples de aplicação web usando **Flask** e **SQLite** para gerenciar clientes e produtos. A aplicação permite **adicionar, editar e deletar** registros de ambas as entidades.
 
+![image](https://github.com/user-attachments/assets/eafff502-1c48-4602-a9d5-ad4a0b7fce7d)
+
+
 ## 📦 Funcionalidades
 
 - Cadastrar novos clientes
